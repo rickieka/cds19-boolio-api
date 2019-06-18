@@ -1,0 +1,23 @@
+.registry: &registry
+  image: docker:stable
+  services:
+    - docker:dind
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
+stages:
+ - build
+
+"Docker build":
+  <<: *registry
+  stage: build
+  script:
+    - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA .
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+
+"SAST":
+  image: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+  script:
+    - gem install brakeman
+    - brakeman
+
