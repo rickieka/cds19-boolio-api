@@ -16,6 +16,12 @@ stages:
     - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA .
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
 
+"Tests":
+  stage: test
+  imae: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+  script:
+    - rail test
+
 "SAST":
   stage: test
   image: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
