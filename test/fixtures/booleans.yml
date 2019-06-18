@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  id: MyString
-  name: MyString
+  id: Boolean1ID
+  name: Boolean1
   val: false
 
 two:
-  id: MyString
-  name: MyString
-  val: false
+  id: Boolean2ID
+  name: Boolean2
+  val: true
