@@ -18,7 +18,7 @@ stages:
 
 "Tests":
   stage: test
-  imae: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+  image: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
   script:
     - rail test
 
