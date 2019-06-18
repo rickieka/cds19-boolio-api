@@ -1,3 +1,6 @@
+variables:
+  RUBY_IMAGE: "ruby:2.5.1"
+
 .registry: &registry
   image: docker:stable
   services:
@@ -18,14 +21,14 @@ stages:
 
 "Tests":
   stage: test
-  image: rails:2.5.1
+  image: $RUBY_IMAGE
   script:
     - bundle install
     - rail test
 
 "SAST":
   stage: test
-  image: rails:2.5.1
+  image: $RUBY_IMAGE
   script:
     - gem install brakeman
     - brakeman
