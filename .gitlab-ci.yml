@@ -7,6 +7,7 @@
 
 stages:
  - build
+ - test
 
 "Docker build":
   <<: *registry
@@ -16,6 +17,7 @@ stages:
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
 
 "SAST":
+  stage: test
   image: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
   script:
     - gem install brakeman
