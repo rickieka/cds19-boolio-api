@@ -23,9 +23,8 @@ stages:
   stage: test
   image: $RUBY_IMAGE
   script:
-    - gem install rails
     - bundle install
-    - rail test
+    - rails test
 
 "SAST":
   stage: test
