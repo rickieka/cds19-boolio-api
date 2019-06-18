@@ -6,25 +6,26 @@
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
 
 stages:
- - build
+#  - build
  - test
 
-"Docker build":
-  <<: *registry
-  stage: build
-  script:
-    - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA .
-    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+# "Docker build":
+#   <<: *registry
+#   stage: build
+#   script:
+#     - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA .
+#     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
 
 "Tests":
   stage: test
-  image: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+  image: rails:2.5.1
   script:
+    - bundle install
     - rail test
 
 "SAST":
   stage: test
-  image: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+  image: rails:2.5.1
   script:
     - gem install brakeman
     - brakeman
