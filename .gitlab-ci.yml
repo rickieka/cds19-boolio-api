@@ -26,9 +26,9 @@ stages:
   image: docker:stable
   services:
     - name: docker:dind
-      command: ["--insecure-registry=$HARBOR_REGISTRY"]
+      command: ["--insecure-registry=harbor.secpipe.stmpy.me"]
   before_script:
-    - docker login -u $HARBOR_USER -p $HARBOR_PASSWORD $HARBOR_REGISTRY
+    - echo "$HARBOR_PASSWORD" | docker login -u $HARBOR_USER $HARBOR_REGISTRY --password-stdin
 
 # run docker build, and push image to harbor registry
 "Docker Build":
