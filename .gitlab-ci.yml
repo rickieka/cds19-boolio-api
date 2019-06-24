@@ -28,6 +28,10 @@ stages:
     - name: docker:dind
       command: ["--insecure-registry=harbor.secpipe.stmpy.me"]
   before_script:
+    - echo "USER: $HARBOR_USER"
+    - echo "PASS: `echo $HARBOR_PASSWORD | wc`"
+    - echo "REGISTRY: $HARBOR_REGISTRY"
+    - echo "PROJ_NAME: $HARBOR_PROJECT_NAME"
     - docker login -u "$HARBOR_USER" -p "$HARBOR_PASSWORD" "$HARBOR_REGISTRY"
 
 # run docker build, and push image to harbor registry
